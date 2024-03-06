@@ -4,15 +4,15 @@ class Calculator {
     // Todo : 내부 구현하기
     func calculate(operation: String, firstNumber: Int, secondNumber: Int) -> Double {
         switch operation {
-        case "+":
+        case "+": // 더하기
             return Double(firstNumber + secondNumber)
-        case "-":
+        case "-": // 빼기
             return Double(firstNumber - secondNumber)
-        case "/":
+        case "/": // 나누기
             return Double(firstNumber) / Double(secondNumber)
-        case "*":
+        case "*": // 곱하기
             return Double(firstNumber * secondNumber)
-        case "%":
+        case "%": // 나머지 연산
             return Double(firstNumber % secondNumber)
         default:
             return -1
