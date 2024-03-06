@@ -2,16 +2,18 @@ import UIKit
 
 class Calculator {
     // Todo : 내부 구현하기
-    func calculate(operation: String, firstNumber: Double, secondNumber: Double) -> Double {
+    func calculate(operation: String, firstNumber: Int, secondNumber: Int) -> Double {
         switch operation {
         case "+":
-            return (firstNumber + secondNumber)
+            return Double(firstNumber + secondNumber)
         case "-":
-            return (firstNumber - secondNumber)
+            return Double(firstNumber - secondNumber)
         case "/":
-            return firstNumber / secondNumber
+            return Double(firstNumber) / Double(secondNumber)
         case "*":
-            return (firstNumber * secondNumber)
+            return Double(firstNumber * secondNumber)
+        case "%":
+            return Double(firstNumber % secondNumber)
         default:
             return -1
         }
@@ -25,8 +27,10 @@ let addResult = calculator.calculate(operation: "+", firstNumber: 10, secondNumb
 let subtractResult = calculator.calculate(operation: "-", firstNumber: 10, secondNumber: 20)
 let multiplyResult = calculator.calculate(operation: "*", firstNumber: 10, secondNumber: 20)
 let divideResult = calculator.calculate(operation: "/", firstNumber: 10, secondNumber: 20)
+let remainderResult = calculator.calculate(operation: "%", firstNumber: 10, secondNumber: 20)
 
 print("addResult : \(addResult)")
 print("subtractResult : \(subtractResult)")
 print("multiplyResult : \(multiplyResult)")
 print("divideResult : \(divideResult)")
+print("remainderResult : \(remainderResult)")
