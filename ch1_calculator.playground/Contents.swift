@@ -6,28 +6,32 @@ class Calculator {
     let multiplyOperation = MultiplyOperation()
     let divideOperation = DivideOperation()
     let remainderOperation = RemainderOperation()
-    // calculate 함수 정의
-    func calculate(operator: String, firstNumber: Double, secondNumber: Double) -> Double? {
-        switch `operator` {
-        case "+":
-            return addOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        case "-":
-            return subtractOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        case "*":
-            return multiplyOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        case "/":
-            return divideOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        case "%":
-            return remainderOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        default:
-            return 0
-        }
+    
+    // 각 연산을 호출하여 계산
+    func add(firstNumber: Double, secondNumber: Double) -> Double {
+        return addOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
     }
+    
+    func subtract(firstNumber: Double, secondNumber: Double) -> Double {
+        return subtractOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+    }
+    
+    func multiply(firstNumber: Double, secondNumber: Double) -> Double {
+        return multiplyOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+    }
+    
+    func divide(firstNumber: Double, secondNumber: Double) -> Double? {
+        return divideOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+    }
+    
+    func remainder(firstNumber: Double, secondNumber: Double) -> Double {
+            return remainderOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        }
 }
 
 class AddOperation {
     func operate(firstNumber: Double, secondNumber: Double) -> Double {
-        return Double(firstNumber + secondNumber)
+        return firstNumber + secondNumber
     }
 }
 
@@ -44,32 +48,35 @@ class MultiplyOperation {
 }
 
 class DivideOperation {
-    func operate(firstNumber: Double, secondNumber: Double) -> Double {
-        return Double(firstNumber) / Double(secondNumber)
+    func operate(firstNumber: Double, secondNumber: Double) -> Double? {
+        guard secondNumber != 0 else { return nil }
+        return firstNumber / secondNumber
     }
 }
 
 class RemainderOperation {
     func operate(firstNumber: Double, secondNumber: Double) -> Double {
-            return firstNumber.truncatingRemainder(dividingBy: secondNumber)
+        return firstNumber.truncatingRemainder(dividingBy: secondNumber)
     }
 }
 
-let calculator = Calculator() // 인스턴스 생성하여 변수에 할당
 
-// Todo : calculator 변수를 활용하여 사칙연산을 진행
-if let addResult = calculator.calculate(operator: "+", firstNumber: 10, secondNumber: 5) {
-    print("addResult : \(addResult)")
+let calculator = Calculator()
+
+// 각 연산 메서드를 호출하여 계산
+let addResult = calculator.add(firstNumber: 10, secondNumber: 5)
+print("addResult : \(addResult)")
+
+let subtractResult = calculator.subtract(firstNumber: 10, secondNumber: 5)
+print("subtractResult : \(subtractResult)")
+
+let multiplyResult = calculator.multiply(firstNumber: 10, secondNumber: 5)
+print("multiplyResult : \(multiplyResult)")
+
+if let divideResult = calculator.divide(firstNumber: 10, secondNumber: 5) {
+    print("divideResult : \(divideResult)")
 }
-if let subtractResult = calculator.calculate(operator: "-", firstNumber: 10, secondNumber: 5) {
-    print("addResult : \(subtractResult)")
-}
-if let multiplyResult = calculator.calculate(operator: "*", firstNumber: 10, secondNumber: 5) {
-    print("addResult : \(multiplyResult)")
-}
-if let divideResult = calculator.calculate(operator: "/", firstNumber: 10, secondNumber: 5) {
-    print("addResult : \(divideResult)")
-}
-if let remainderResult = calculator.calculate(operator: "%", firstNumber: 10, secondNumber: 5) {
-    print("addResult : \(remainderResult)")
-}
+
+let remainderResult = calculator.remainder(firstNumber: 10, secondNumber: 15)
+print("remainderResult : \(remainderResult)")
+
