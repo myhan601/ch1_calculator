@@ -1,36 +1,75 @@
 import UIKit
 
 class Calculator {
-    // Todo : 내부 구현하기
-    func calculate(operation: String, firstNumber: Int, secondNumber: Int) -> Double {
-        switch operation {
-        case "+": // 더하기
-            return Double(firstNumber + secondNumber)
-        case "-": // 빼기
-            return Double(firstNumber - secondNumber)
-        case "/": // 나누기
-            return Double(firstNumber) / Double(secondNumber)
-        case "*": // 곱하기
-            return Double(firstNumber * secondNumber)
-        case "%": // 나머지 연산
-            return Double(firstNumber % secondNumber)
+    let addOperation = AddOperation()
+    let subtractOperation = SubtractOperation()
+    let multiplyOperation = MultiplyOperation()
+    let divideOperation = DivideOperation()
+    let remainderOperation = RemainderOperation()
+    // calculate 함수 정의
+    func calculate(operator: String, firstNumber: Double, secondNumber: Double) -> Double? {
+        switch `operator` {
+        case "+":
+            return addOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        case "-":
+            return subtractOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        case "*":
+            return multiplyOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        case "/":
+            return divideOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        case "%":
+            return remainderOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
         default:
-            return -1
+            return 0
         }
+    }
+}
+
+class AddOperation {
+    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+        return Double(firstNumber + secondNumber)
+    }
+}
+
+class SubtractOperation {
+    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+        return Double(firstNumber - secondNumber)
+    }
+}
+
+class MultiplyOperation {
+    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+        return Double(firstNumber * secondNumber)
+    }
+}
+
+class DivideOperation {
+    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+        return Double(firstNumber) / Double(secondNumber)
+    }
+}
+
+class RemainderOperation {
+    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+            return firstNumber.truncatingRemainder(dividingBy: secondNumber)
     }
 }
 
 let calculator = Calculator() // 인스턴스 생성하여 변수에 할당
 
 // Todo : calculator 변수를 활용하여 사칙연산을 진행
-let addResult = calculator.calculate(operation: "+", firstNumber: 10, secondNumber: 20)
-let subtractResult = calculator.calculate(operation: "-", firstNumber: 10, secondNumber: 20)
-let multiplyResult = calculator.calculate(operation: "*", firstNumber: 10, secondNumber: 20)
-let divideResult = calculator.calculate(operation: "/", firstNumber: 10, secondNumber: 20)
-let remainderResult = calculator.calculate(operation: "%", firstNumber: 10, secondNumber: 20)
-
-print("addResult : \(addResult)")
-print("subtractResult : \(subtractResult)")
-print("multiplyResult : \(multiplyResult)")
-print("divideResult : \(divideResult)")
-print("remainderResult : \(remainderResult)")
+if let addResult = calculator.calculate(operator: "+", firstNumber: 10, secondNumber: 5) {
+    print("addResult : \(addResult)")
+}
+if let subtractResult = calculator.calculate(operator: "-", firstNumber: 10, secondNumber: 5) {
+    print("addResult : \(subtractResult)")
+}
+if let multiplyResult = calculator.calculate(operator: "*", firstNumber: 10, secondNumber: 5) {
+    print("addResult : \(multiplyResult)")
+}
+if let divideResult = calculator.calculate(operator: "/", firstNumber: 10, secondNumber: 5) {
+    print("addResult : \(divideResult)")
+}
+if let remainderResult = calculator.calculate(operator: "%", firstNumber: 10, secondNumber: 5) {
+    print("addResult : \(remainderResult)")
+}
