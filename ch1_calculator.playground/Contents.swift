@@ -1,61 +1,66 @@
 import UIKit
 
 class Calculator {
-    let addOperation = AddOperation()
-    let subtractOperation = SubtractOperation()
-    let multiplyOperation = MultiplyOperation()
-    let divideOperation = DivideOperation()
-    let remainderOperation = RemainderOperation()
+    let addOp: AbstractOperation = AddOperation()
+    let subtractOp: AbstractOperation = SubtractOperation()
+    let multiplyOp: AbstractOperation = MultiplyOperation()
+    let divideOp: AbstractOperation = DivideOperation()
+    let remainderOp: AbstractOperation = RemainderOperation()
     
     // 각 연산을 호출하여 계산
     func add(firstNumber: Double, secondNumber: Double) -> Double {
-        return addOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        return addOp.operate(firstNumber: firstNumber, secondNumber: secondNumber)
     }
     
     func subtract(firstNumber: Double, secondNumber: Double) -> Double {
-        return subtractOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        return subtractOp.operate(firstNumber: firstNumber, secondNumber: secondNumber)
     }
     
     func multiply(firstNumber: Double, secondNumber: Double) -> Double {
-        return multiplyOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        return multiplyOp.operate(firstNumber: firstNumber, secondNumber: secondNumber)
     }
     
     func divide(firstNumber: Double, secondNumber: Double) -> Double? {
-        return divideOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+        return divideOp.operate(firstNumber: firstNumber, secondNumber: secondNumber)
     }
     
     func remainder(firstNumber: Double, secondNumber: Double) -> Double {
-            return remainderOperation.operate(firstNumber: firstNumber, secondNumber: secondNumber)
-        }
+        return remainderOp.operate(firstNumber: firstNumber, secondNumber: secondNumber)
+    }
 }
 
-class AddOperation {
+class AbstractOperation {
     func operate(firstNumber: Double, secondNumber: Double) -> Double {
+        return 0.0
+    }
+}
+
+class AddOperation: AbstractOperation {
+    override func operate(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber + secondNumber
     }
 }
 
-class SubtractOperation {
-    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+class SubtractOperation: AbstractOperation {
+    override func operate(firstNumber: Double, secondNumber: Double) -> Double {
         return Double(firstNumber - secondNumber)
     }
 }
 
-class MultiplyOperation {
-    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+class MultiplyOperation: AbstractOperation {
+    override func operate(firstNumber: Double, secondNumber: Double) -> Double {
         return Double(firstNumber * secondNumber)
     }
 }
 
-class DivideOperation {
-    func operate(firstNumber: Double, secondNumber: Double) -> Double? {
-        guard secondNumber != 0 else { return nil }
+class DivideOperation: AbstractOperation {
+    override func operate(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber / secondNumber
     }
 }
 
-class RemainderOperation {
-    func operate(firstNumber: Double, secondNumber: Double) -> Double {
+class RemainderOperation: AbstractOperation {
+    override func operate(firstNumber: Double, secondNumber: Double) -> Double {
         return firstNumber.truncatingRemainder(dividingBy: secondNumber)
     }
 }
